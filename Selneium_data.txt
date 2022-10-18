@@ -1,0 +1,99 @@
+frame work is mainly three phase:
+---------------------------------
+1.Implemenatiaotn
+2.Execution 
+3.Maintance
+
+for every setup method and teard down methd is common
+
+Every test case extend from the base class.
+
+----
+Base calsses:
+------------
+base class deals with all the common methods.
+This class is responsible for loading the configurations from property files Initializing the WebDriver implicit waits.
+
+
+Screenshots:
+---------------
+ will be captured and stored in a Separate Folder. Also, the Screenshots of the Failed Test cases will be added to the Extent Reports.
+
+Maven
+----- 
+We are using Maven for build execution and dependency purpose.
+
+
+Propperties file:
+-----------------------
+This file (config.properties) stores the information that remains static throughout the framework such as browser specific information, application URL, Test Data path etc.
+All the details which change as per the environment and authorization such as URL, Login Credentials are kept in the config.properties file. Keeping these details in a separate
+file makes easy to maintain.
+
+In Selenium .properties files are mainly used to store GUI locators / elements, and also Global fields like database configuration details
+properties' files are mainly used in Java programs to maintain project configuration data, database config or project settings 
+Purpose of properties files in Selenium Automation is to store Project configuration data like website details, browser etc.
+Advantage - Can change the details from a single location (i.e. Properties file), instead of editing them multiple
+times from individual test scripts.
+
+
+Properties prop = new Properties();
+prop.load(fileInput);
+WebDriver driver = new FirefoxDriver();
+driver.get(prop.getProperty("URL"));
+driver.findElement(By.id("Email")).sendKeys(prop.getProperty("username"));
+driver.findElement(By.id("Passwd")).sendKeys(prop.getProperty("password"));
+driver.findElement(By.id("SignIn")).click();
+
+Extend Report:
+------------
+
+We are using Extent Reports which generates beautiful HTML reports for Reporting purposes.
+
+ExtentReports report = new ExtentReports(FilePath, true, DisplayOrder.NEWEST_FIRST);
+
+report.loadConfig(new File("ReportsConfig.xml"));
+
+report.addSystemInfo("Selenium Version", "2.53.1").addSystemInfo(
+				"Environment", "QA");
+
+Caprure screenshot:
+------------------
+
+Selenium webdriver can automatically take screenshots during the execution
+
+File DestFile=new File(filePath);
+TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(SrcFile, DestFile);
+
+=========================================
+Logging Mechanism:
+-------------------
+Logging Mechanism - We are using log4j library to maintain logging of our project. We are using all kinds of logging statements like 
+INFO,DEBUG,ERROR etc. We have maintained a separate class for it in com.companyName.main package
+
+Reporting
+-----------
+We are using Extent Report for reporting purpose. It is a third party report and it is easily available at maven central repo.
+
+Pages:
+------
+We are using the Page Object Model which is one of the design patterns for test automation and here we are maintaining 
+all application pages. Each page contains locators and activities on the elements.
+
+===========================
+
+Hashmap Used in project
+-----------------------
+hash map is used to to test the diffrent user in the form of key vaule faires.
+
+=========================
+GITGUB
+----------
+1.create github account
+
+2.start project create repositry
+3.start eclipse
+4.go to prospective->git repository and click on add git repo
+5.
